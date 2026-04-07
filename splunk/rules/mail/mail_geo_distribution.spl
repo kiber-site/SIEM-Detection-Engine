@@ -1,0 +1,3 @@
+index="mail_logs" type="auth" status="success"
+| iplocation src_ip
+| geostats count by user
