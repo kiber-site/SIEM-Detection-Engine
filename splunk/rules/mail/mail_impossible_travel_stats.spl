@@ -1,0 +1,4 @@
+index="mail_logs" type="auth" status="success"
+| iplocation src_ip
+| stats dc(Country) as country_count, values(Country) as countries, values(City) as cities by user
+| where country_count > 1
