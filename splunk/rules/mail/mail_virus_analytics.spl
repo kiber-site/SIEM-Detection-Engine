@@ -1,0 +1,4 @@
+index="mail_logs" type="mail" event="virus_detected" 
+| stats count by virus_name, file_name, src_ip 
+| sort - count 
+| rename virus_name as "Virus Tipi", file_name as "Fayl Adi", src_ip as "Manba IP", count as "Bloklanma Sayi"
