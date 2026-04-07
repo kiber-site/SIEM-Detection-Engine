@@ -1,0 +1,5 @@
+index="mail_logs" type="auth" status="failed" 
+| stats count by src_ip, user 
+| where count > 5 
+| sort - count 
+| rename count as "Cehd Sayi", src_ip as "Hucumcu IP", user as "Istifadeci"
