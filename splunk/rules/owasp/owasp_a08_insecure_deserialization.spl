@@ -1,0 +1,5 @@
+index=main source="http:docker_web_logs"
+| rex field=line "(?<uri>\S+)\s+HTTP"
+| where match(uri, "(?i)rO0AB|YTo[0-9]+:|O:[0-9]+:|py/object|gASV")
+| stats count by clientip, uri
+| eval alert="CRITICAL: Potential Insecure Deserialization attack detected!"
