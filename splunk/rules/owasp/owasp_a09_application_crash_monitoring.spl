@@ -1,0 +1,5 @@
+index=main source="http:docker_web_logs"
+| rex field=line "HTTP/\d\.\d\"\s+(?<status>5\d{2})"
+| stats count as error_count by clientip, host
+| where error_count > 50
+| eval alert="HIGH: High volume of Server Errors (5xx) detected - Potential DoS/Exploit"
