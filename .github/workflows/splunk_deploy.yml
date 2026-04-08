@@ -30,7 +30,7 @@ jobs:
       
       - name: Sync to Splunk
         env:
-          # Settings > Secrets hissəsindəki məlumatları bura bağla
+          
           SPLUNK_URL: ${{ secrets.SPLUNK_URL }}
           SPLUNK_TOKEN: ${{ secrets.SPLUNK_TOKEN }}
         run: python scripts/sync_splunk.py
