@@ -1,0 +1,5 @@
+index=main source="http:docker_web_logs"
+| rex field=line "(?<method>\w+)\s+(?<uri>\S+)\s+HTTP"
+| stats dc(uri) as unique_uri_count count as total_requests by clientip
+| where unique_uri_count > 20
+| rename unique_uri_count as "Denenen Farklı Dosya Sayısı"
