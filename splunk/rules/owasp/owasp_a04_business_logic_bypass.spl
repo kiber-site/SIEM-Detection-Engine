@@ -1,0 +1,8 @@
+index=main source="http:docker_web_logs"
+| rex field=line "(?<method>POST|PUT)\s+(?<uri>\S+)\s+HTTP"
+| where match(uri, "(?i)checkout|payment|order|basket")
+| rex field=line "quantity=(?<qty>\d+)"
+| rex field=line "amount=(?<amt>\d+\.?\d*)"
+| where qty > 100 OR amt <= 0
+| stats count by clientip, uri, qty, amt
+| eval alert="SUSPICIOUS: Insecure transaction logic detected!"
