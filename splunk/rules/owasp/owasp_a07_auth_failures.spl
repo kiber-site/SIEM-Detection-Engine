@@ -1,0 +1,5 @@
+index=main source="http:docker_web_logs"
+| rex field=line "HTTP/\d\.\d\"\s+(?<status>\d{3})"
+| where status=401 OR status=403
+| stats count as failure_count by clientip
+| where failure_count > 10
