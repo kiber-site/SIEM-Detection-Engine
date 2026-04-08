@@ -1,36 +1,30 @@
 name: Splunk Rule Sync
 
-
 on:
   push:
     branches:
-      - main  
+      - main
     paths:
-      - 'splunk/rules/**' 
+      - 'splunk/rules/**'
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
 
     steps:
-      
       - name: Code Checkout
         uses: actions/checkout@v3
 
-      
       - name: Python Setup
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
-      
       - name: Install Requests Library
         run: pip install requests
 
-      
       - name: Sync to Splunk
         env:
-          
           SPLUNK_URL: ${{ secrets.SPLUNK_URL }}
           SPLUNK_TOKEN: ${{ secrets.SPLUNK_TOKEN }}
-        run: python scripts/sync_splunk.py
+        run: python scripts/sync_rules.py
