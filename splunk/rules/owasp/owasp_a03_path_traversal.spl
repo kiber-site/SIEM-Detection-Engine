@@ -1,5 +1,14 @@
 index=main source="http:docker_web_logs"
-| rex field=line "(?<uri>\S+)\s+HTTP"
-| where match(uri, "(?i)\.\.\/|\/etc\/passwd|boot\.ini")
-| stats count by clientip, uri
-| eval attack_type="Path Traversal"
+| rex field=line "(?<method>\w+)\s+(?<uri>\S+)\s+HTTP/\d+\.\d+\"\s+(?<status>\d+)"
+| eval is_attack=if(match(uri, "(?i)\.\.\/|etc/passwd|boot\.ini|win\.ini|/etc/shadow|%2e%2e%2f"), 1, 0)
+| where is_attack=1
+| stats count as attack_count, 
+         values(method) as methods, 
+         values(status) as status_codes, 
+         dc(uri) as unique_targets 
+         by clientip
+| eval severity=case(
+    match(status_codes, "200|301"), "CRITICAL - Successful/Possible Access",
+    attack_count > 10, "HIGH - Brute Force/Scanning",
+    1=1, "MEDIUM - Attempt")
+| sort - attack_count
