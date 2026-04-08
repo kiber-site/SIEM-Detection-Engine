@@ -34,7 +34,7 @@ def push_to_splunk(rule_name, query):
         print(f"❌ Xəta: {rule_name} - {response.status_code} - {response.text}")
 
 
-rule_files = glob.glob("splunk/rules/*.spl")
+rule_files = glob.glob("splunk/rules/**/*.spl", recursive=True)
 for file_path in rule_files:
     rule_id = os.path.basename(file_path).replace(".spl", "")
     with open(file_path, "r", encoding="utf-8") as f:
