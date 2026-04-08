@@ -1,0 +1,5 @@
+index=main source="http:docker_web_logs"
+| rex field=line "(?<uri>\S+)\s+HTTP"
+| where match(uri, "(?i)<script|alert\(|onerror=")
+| stats count by clientip, uri
+| eval attack_type="XSS"
