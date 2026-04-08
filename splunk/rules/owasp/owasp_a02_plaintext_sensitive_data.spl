@@ -3,4 +3,4 @@ index=main source="http:docker_web_logs"
 | where match(line, "(?i)password=|passwd=|token=|apikey=|secret=")
 | stats count by clientip, uri, method
 | eval alert="CRITICAL: Sensitive data sent in plaintext over HTTP!"
-|
+
