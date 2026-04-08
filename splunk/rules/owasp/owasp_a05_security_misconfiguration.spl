@@ -1,0 +1,4 @@
+index=main source="http:docker_web_logs"
+| rex field=line "(?<uri>\S+)\s+HTTP"
+| where match(uri, "\.env|\.git|config\.php|database\.php|phpinfo")
+| stats count by clientip, uri
