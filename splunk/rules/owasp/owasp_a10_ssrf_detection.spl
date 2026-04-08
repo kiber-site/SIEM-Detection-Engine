@@ -1,0 +1,4 @@
+index=main source="http:docker_web_logs"
+| rex field=line "(?<uri>\S+)\s+HTTP"
+| where match(uri, "(?i)url=|dest=|uri=|path=|file=") AND match(uri, "https?:\/\/|localhost|127\.0\.0\.1")
+| stats count by clientip, uri
