@@ -1,11 +1,8 @@
 {
   "rule_name": "Internal Port Scan Detected",
-  "description": "Detects high volume of blocked internal traffic to multiple ports from a single source.",
-  "severity": 6,
   "conditions": [
     "when the event context is Local-to-Local",
-    "when the event category is one of the following: ACL Deny, Firewall Deny",
+    "when the event matches this search filter: (Category Equals ACL Deny)",
     "when at least 100 events are seen with the same Source IP and different Destination Port in 5 minutes"
-  ],
-  "mitre_technique": "T1046 (Network Service Scanning)"
+  ]
 }
