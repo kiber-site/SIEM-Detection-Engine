@@ -1,0 +1,7 @@
+{
+  "rule_name": "Multiple Account Lockouts",
+  "conditions": [
+    "when the event matches this search filter: (Event ID Equals 4740)",
+    "when at least 5 events are seen with the same Source IP and different Destination User in 10 minutes"
+  ]
+}
