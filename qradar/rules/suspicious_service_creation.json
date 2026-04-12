@@ -1,0 +1,7 @@
+{
+  "rule_name": "Suspicious Service Creation",
+  "conditions": [
+    "when the event matches this search filter: (Event ID Equals 4697)",
+    "when the event matches this search filter: (Payload matches .*(\\\\Temp\\\\|\\\\AppData\\\\|\\\\Public\\\\).*)"
+  ]
+}
