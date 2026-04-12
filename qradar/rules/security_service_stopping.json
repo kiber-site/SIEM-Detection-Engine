@@ -1,0 +1,7 @@
+{
+  "rule_name": "Security Service Stopping",
+  "conditions": [
+    "when the event matches this search filter: (Event ID Equals 7036)",
+    "when the event matches this search filter: (Payload matches .*(WinDefend|WinCollect|HealthService).* AND Payload contains stopped)"
+  ]
+}
