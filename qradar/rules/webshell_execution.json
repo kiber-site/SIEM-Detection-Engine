@@ -1,0 +1,7 @@
+{
+  "rule_name": "Web Shell Execution via IIS",
+  "conditions": [
+    "when the event matches this search filter: (Parent Process Name Equals w3wp.exe)",
+    "when the event matches this search filter: (Process Name matches (cmd.exe|powershell.exe))"
+  ]
+}
