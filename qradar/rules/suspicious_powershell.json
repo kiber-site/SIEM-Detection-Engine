@@ -1,0 +1,7 @@
+{
+  "rule_name": "Suspicious PowerShell Execution",
+  "conditions": [
+    "when the event matches this search filter: (Process Name matches (?i)powershell\\.exe)",
+    "when the event matches this search filter: (Payload matches (?i).*(-ep bypass|-enc|-w hidden|-nop).*) "
+  ]
+}
