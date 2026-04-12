@@ -2,6 +2,6 @@
   "rule_name": "Data Exfiltration Indicator",
   "conditions": [
     "when the event context is Local-to-Remote",
-    "when at least 5000 events are seen with the same Source IP in 30 minutes"
+    "when at least 5000 events are seen with the same Source IP in 20 minutes"
   ]
 }
