@@ -1,0 +1,7 @@
+{
+  "rule_name": "Sensitive Group Modification",
+  "conditions": [
+    "when the event matches this search filter: (Event ID Equals 4728 OR Event ID Equals 4732)",
+    "when the event matches this search filter: (Payload contains Domain Admins)"
+  ]
+}
