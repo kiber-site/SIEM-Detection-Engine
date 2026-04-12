@@ -6,12 +6,11 @@ import urllib3
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-# Bu dəyişənləri GitHub Secrets-də qeyd etməlisən
-QRADAR_URL = os.getenv('QRADAR_URL') # Məsələn: https://13.61.144.181
+QRADAR_URL = os.getenv('QRADAR_URL') 
 QRADAR_TOKEN = os.getenv('QRADAR_TOKEN')
 
 def push_to_qradar(rule_data):
-    # QRadar API-də qaydaların idarə olunması üçün endpoint
+    
     endpoint = f"{QRADAR_URL}/api/analytics/rules"
     headers = {
         "SEC": QRADAR_TOKEN,
@@ -21,7 +20,6 @@ def push_to_qradar(rule_data):
     
     rule_name = rule_data.get('rule_name')
     
-    # Əvvəlcə yoxlayırıq ki, bu adda qayda var? (Update yoxsa Create)
     check_url = f"{endpoint}?filter=name%3D%22{rule_name}%22"
     response = requests.get(check_url, headers=headers, verify=False)
     
